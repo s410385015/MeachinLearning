@@ -8,14 +8,14 @@ Ax=b
 (LU)x=b -> Ly=b ->Ux=y
 """
 def FindInverseFromLU(L,U):
-    Inv=[[0 for i in range (0,len(L))]for i in range(0,len(L))]
+    Inv=[[0 for i in range (len(L))]for i in range(len(L))]
     for k in range (0,len(L)):
-        base=[0 for j in range(0,len(L))]
+        base=[0 for j in range(len(L))]
         base[k]=1
-        Y=np.zeros(len(base))
-        X=Y.copy()
-        for i in range(0,len(base)):
-            for j in range(0,i):
+        Y=[0 for j in range(len(base))]
+        X=[0 for j in range(len(base))]
+        for i in range(len(base)):
+            for j in range(i):
                 Y[i]-=L[i][j]*Y[j]
             Y[i]+=L[i][i]*base[i]
     
@@ -24,9 +24,10 @@ def FindInverseFromLU(L,U):
                 X[i]-=U[i][j]*X[j]
             X[i]+=Y[i]
             X[i]/=U[i][i]
-        for i in range (0,len(X)):
+        for i in range (len(X)):
             Inv[i][k]=X[i]
 
+     
     Inv=np.array(Inv)
     return Inv
 
@@ -98,8 +99,8 @@ eg.
     | 100 120 |   |   0 0.5 |   | 100   120.5 |   
 """
 def Add(a,b):
-    for i in range(0,len(a)):
-        for j in range(0,len(a[i])):
+    for i in range(len(a)):
+        for j in range(len(a[i])):
             a[i][j]+=b[i][j]
     a=np.array(a)
     return a
@@ -112,8 +113,8 @@ eg.
     | 100 120 |   | 1  1 |   |  99 101 |   
 """
 def Sub(a,b):
-    for i in range(0,len(a)):
-        for j in range(0,len(a[i])):
+    for i in range(len(a)):
+        for j in range(len(a[i])):
             a[i][j]-=b[i][j]
     a=np.array(a)
     return a
